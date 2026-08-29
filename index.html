@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DƯƠNG HUY® - Kính Cường Lực Cao Cấp</title>
+  <style>
+    /* Reset & General Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { line-height: 1.6; color: #333; background-color: #f8fafc; }
+    a { text-decoration: none; color: inherit; }
+
+    /* 1. Header */
+    header { 
+      background: #fff; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; 
+      border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; 
+    }
+    .logo-container { display: flex; align-items: center; gap: 10px; }
+    .logo-img { height: 45px; width: auto; object-fit: contain; }
+    .logo-text { font-size: 1.2rem; font-weight: bold; color: #1a365d; }
+    
+    /* Navigation Styles with Dropdown */
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a, .dropdown-btn { color: #000000; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; cursor: pointer; }
+    nav a:hover, .dropdown:hover .dropdown-btn { color: #0284c7; }
+
+    /* Dropdown Container */
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-btn::after { content: " ˅"; font-size: 0.75rem; color: #0284c7; }
+    
+    /* Dropdown Content Menu */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #ffffff;
+      min-width: 240px;
+      box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      padding: 6px 0;
+      z-index: 1001;
+      border: 1px solid #e2e8f0;
+    }
+
+    .dropdown-content a {
+      color: #334155;
+      padding: 10px 20px;
+      text-decoration: none;
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: none;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .dropdown-content a:last-child { border-bottom: none; }
+    .dropdown-content a:hover { background-color: #f8fafc; color: #0284c7; }
+    .dropdown:hover .dropdown-content { display: block; }
+
+    /* 2. Hero & Sub-bar */
+    .hero { 
+      background: linear-gradient(rgba(10, 37, 64, 0.7), rgba(10, 37, 64, 0.7)), 
+                  url('https://i.ibb.co/yFccvmN8/toa-nha-hien-dai-ung-dung-kinh-duong-huy.jpg') center/cover; 
+      color: #fff; padding: 100px 10%; text-align: right; 
+    }
+    .hero h1 { font-size: 2.8rem; font-weight: 800; text-transform: uppercase; line-height: 1.2; }
+    
+    .sub-bar { background: #1a237e; color: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .btn-quote { border: 1px solid #fff; background: transparent; color: #fff; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+    .btn-quote:hover { background: #fff; color: #1a237e; }
+
+    /* Container chung */
+    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+
+    /* 3. KHỐI GIỚI THIỆU TABBED COMPONENT */
+    .about-tabs-container {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+
+    .tabs-header {
+      display: flex;
+      background: #f1f5f9;
+      border-bottom: 2px solid #e2e8f0;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab-btn:hover { color: #0284c7; background: #e2e8f0; }
+    .tab-btn.active { color: #0284c7; background: #ffffff; border-bottom: 3px solid #0284c7; }
+
+    .tab-content { display: none; padding: 35px; animation: fadeIn 0.4s ease; }
+    .tab-content.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-grid { display: flex; gap: 35px; align-items: center; }
+    .tab-text { flex: 1.2; }
+    .tab-text h3 { color: #1a365d; font-size: 1.5rem; margin-bottom: 15px; border-left: 4px solid #0284c7; padding-left: 12px; }
+    .tab-text p { margin-bottom: 15px; text-align: justify; color: #334155; }
+    
+    .tab-image { flex: 1; }
+    .tab-image img { width: 100%; height: 320px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+    .info-list { list-style: none; margin-top: 15px; }
+    .info-list li { font-size: 0.95rem; line-height: 1.8; position: relative; padding-left: 20px; color: #334155; }
+    .info-list li::before { content: "•"; position: absolute; left: 0; color: #0284c7; font-weight: bold; font-size: 1.2rem; }
+
+    .org-chart-box { text-align: center; background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px dashed #cbd5e1; }
+
+    /* 4. ACCORDION HÌNH ẢNH NHÀ MÁY */
+    .about-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 35px;
+      box-shadow: 0 8px 32px rgba(0, 28, 60, 0.08);
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+
+    .about-title {
+      color: #1a365d;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      border-left: 5px solid #0284c7;
+      padding-left: 15px;
+    }
+
+    .toggle-section {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      background: #f8fafc;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-section[open] { background: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+
+    .toggle-summary {
+      padding: 15px 20px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0284c7;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .toggle-summary::-webkit-details-marker { display: none; }
+    .toggle-summary::after { content: "▼"; font-size: 0.8rem; color: #0284c7; transition: transform 0.3s ease; }
+    .toggle-section[open] .toggle-summary::after { transform: rotate(180deg); }
+    .toggle-summary:hover { background: #f1f5f9; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px; }
+
+    .img-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .img-card:hover { transform: translateY(-5px); }
+    .img-box { height: 220px; width: 100%; overflow: hidden; background-color: #f8fafc; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-caption { padding: 8px; font-size: 1rem; font-weight: 700; color: #1a365d; text-align: center; border-top: 1px solid #f1f5f9; }
+
+    /* 5. Năng Lực Sản Xuất */
+    .production-section { display: flex; background: #87CEEB; border-radius: 20px; overflow: hidden; align-items: flex-start; }
+    .prod-image { flex: 1.2; min-height: 100%; }
+    .prod-image img { width: 100%; height: 100%; min-height: 400px; object-fit: cover; display: block; }
+    .prod-content { flex: 1; padding: 30px; }
+    .prod-content h2 { color: #fff; font-size: 2rem; margin-bottom: 20px; text-transform: uppercase; }
+    .yellow-btn-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .prod-accordion { background: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+    .prod-accordion summary {
+      background: #ffffff; color: #1a365d; padding: 12px 20px; font-weight: bold; text-transform: uppercase;
+      font-size: 1rem; cursor: pointer; list-style: none; user-select: none; display: flex; justify-content: space-between; align-items: center;
+    }
+    .prod-accordion summary::-webkit-details-marker { display: none; }
+    .prod-accordion summary::after { content: "▼"; font-size: 0.8rem; transition: transform 0.3s ease; }
+    .prod-accordion[open] summary::after { transform: rotate(180deg); }
+    .prod-accordion summary:hover { background: #f0f4f8; }
+
+    .prod-content-box { padding: 15px; background: #ffffff; border-top: 1px solid #eee; display: flex; gap: 10px; flex-wrap: wrap; }
+    .prod-content-box img { width: 100%; max-height: 250px; object-fit: cover; border-radius: 6px; display: block; }
+
+    /* 6. Đối Tác & Chất Lượng */
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .section-title { font-size: 1.4rem; color: #1a365d; text-transform: uppercase; font-weight: bold; }
+    .partner-logos { display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap; padding: 20px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+    .partner-logos img { height: 50px; width: auto; object-fit: contain; }
+
+    /* 7. Tin Tức & Sự Kiện */
+    .news-grid { display: grid; grid-template-columns: 2fr 1.5fr 1.2fr; gap: 20px; }
+    .news-main-card { background: #fff; border: 1px solid #eee; border-radius: 6px; overflow: hidden; }
+    .news-main-card img { width: 100%; height: 220px; object-fit: cover; }
+    .news-main-content { padding: 15px; }
+    .news-main-title { font-weight: bold; color: #1a365d; font-size: 1.1rem; margin-bottom: 8px; line-height: 1.4; }
+    .news-date { font-size: 0.85rem; color: #888; margin-bottom: 10px; }
+    .news-desc { font-size: 0.9rem; color: #666; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .news-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
+    .news-list-item { font-size: 0.9rem; color: #333; line-height: 1.4; position: relative; padding-left: 15px; }
+    .news-list-item::before { content: '•'; position: absolute; left: 0; color: #0284c7; font-weight: bold; }
+
+    .center-banners { display: flex; flex-direction: column; gap: 15px; }
+    .banner-box { 
+      color: #fff; padding: 20px; border-radius: 6px; text-align: center; 
+      background: linear-gradient(rgba(26, 35, 126, 0.85), rgba(26, 35, 126, 0.85)), url('https://i.ibb.co/608mrMfK/dulich1.jpg') center/cover; 
+      min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+    }
+    .banner-box-img { 
+      background: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://i.ibb.co/0pWt8hg5/dulich2.jpg') center/cover; 
+      height: 180px; border-radius: 6px; display: flex; align-items: flex-end; padding: 15px; 
+    }
+    .banner-box-img span { color: #fff; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+    .investor-box { background: #eef6f9; border: 1px solid #d0e3ec; border-radius: 6px; padding: 20px; }
+    .investor-title { color: #2e7d32; font-weight: bold; font-size: 1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+    .investor-links { display: flex; flex-direction: column; gap: 10px; }
+    .investor-links a { font-size: 0.9rem; color: #1a365d; font-weight: 600; }
+
+    /* =========================================================
+       8. KHỐI FOOTER CHÂN TRANG
+    ========================================================= */
+    .site-footer {
+      background: #f1f5f9;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), 
+                        url('https://i.ibb.co/yFccvmN8/toa-nha-hien-dai-ung-dung-kinh-duong-huy.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 40px 0 20px 0;
+      border-top: 1px solid #e2e8f0;
+      color: #1a2536;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.3fr 1.4fr;
+      gap: 30px;
+    }
+
+    .footer-col h4 {
+      color: #1a237e;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .footer-col h4::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: #0284c7;
+      margin-top: 5px;
+    }
+
+    /* Cột 1: Giới thiệu */
+    .footer-menu { list-style: none; }
+    .footer-menu li { margin-bottom: 10px; }
+    .footer-menu a {
+      color: #334155;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-menu a::before { content: "•"; color: #0284c7; font-weight: bold; }
+    .footer-menu a:hover { color: #0284c7; }
+
+    .gov-badge {
+      margin-top: 15px;
+      display: inline-block;
+      background: #0084c7;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0, 132, 199, 0.3);
+    }
+
+    /* Cột 2: Hotline & Mạng xã hội */
+    .hotline-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .phone-icon {
+      width: 40px;
+      height: 40px;
+      background: #d32f2f;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+    }
+
+    .hotline-num {
+      color: #d32f2f;
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .hotline-note {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .social-btn {
+      width: 32px;
+      height: 32px;
+      background: #94a3b8;
+      color: #fff;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      transition: background 0.3s;
+    }
+
+    .social-btn:hover { background: #0284c7; }
+
+    .work-hours {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: #b91c1c;
+      font-weight: 700;
+    }
+
+    .work-note {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    /* Cột 3: Liên hệ công ty */
+    .company-name-ft {
+      font-weight: 800;
+      color: #1a237e;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .address-item {
+      font-size: 0.85rem;
+      color: #334155;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .address-item strong { color: #166534; }
+
+    /* Cột 4: Hệ thống văn phòng đại diện */
+    .office-list { list-style: none; }
+    .office-item {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+      color: #334155;
+      border-bottom: 1px dashed #cbd5e1;
+      padding-bottom: 8px;
+    }
+
+    .office-item:last-child { border-bottom: none; }
+
+    .office-item::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #16a34a;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .office-addr { font-weight: 600; color: #1e293b; }
+    .office-tel { color: #64748b; font-size: 0.8rem; margin-top: 2px; }
+
+    .copyright-bar {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid #cbd5e1;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      .tab-grid { flex-direction: column; }
+      .news-grid { grid-template-columns: 1fr 1fr; }
+      .production-section { flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 15px; }
+      nav { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .hero h1 { font-size: 2rem; }
+      .news-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .dropdown-content { position: static; box-shadow: none; width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. HEADER -->
+  <header>
+    <a href="#" class="logo-container">
+      <img src="https://i.ibb.co/Jwspz2zQ/logo-img.jpg" alt="DƯƠNG HUY TEMPERED GLASS" class="logo-img">
+      <span class="logo-text">DƯƠNG HUY®</span>
+    </a>
+    <nav>
+      <!-- MENU SỔ XUỐNG GIỚI THIỆU -->
+      <div class="dropdown">
+        <a href="#about-section" class="dropdown-btn">GIỚI THIỆU</a>
+        <div class="dropdown-content">
+          <a href="#about-section" onclick="openTab(event, 'tab-gioi-thieu-chung')">Giới thiệu chung</a>
+          <a href="#about-section" onclick="openTab(event, 'tab-thong-tin-cong-ty')">Thông tin công ty</a>
+          <a href="#about-section" onclick="openTab(event, 'tab-su-menh-tam-nhin')">Sứ mệnh – Tầm nhìn</a>
+          <a href="#about-section" onclick="openTab(event, 'tab-so-do-to-chuc')">Sơ đồ tổ chức</a>
+          <a href="#about-section" onclick="openTab(event, 'tab-he-thong-van-phong')">Hệ thống văn phòng đại diện</a>
+          <a href="#about-section" onclick="openTab(event, 'tab-chinh-sach-quy-dinh')">Chính sách & Quy định</a>
+        </div>
+      </div>
+
+      <!-- MENU SỔ XUỐNG SẢN PHẨM -->
+      <div class="dropdown">
+        <a href="#products" class="dropdown-btn">SẢN PHẨM</a>
+        <div class="dropdown-content">
+          <a href="#prod-kinh-dan">Kính Dán An Toàn</a>
+          <a href="#prod-kinh-cuong-luc">Kính Cường Lực</a>
+          <a href="#prod-kinh-hop">Kính Hộp Cách Âm Cách Nhiệt</a>
+          <a href="#prod-kinh-dan-cuong-luc">Kính Dán Cường Lực</a>
+          <a href="#prod-kinh-son">Kính Sơn Màu Trang Trí</a>
+          <a href="#prod-kinh-phan-quang">Kính Phản Quang</a>
+          <a href="#prod-kinh-low-e">Kính Low-E Tiết Kiệm Năng Lượng</a>
+          <a href="#prod-kinh-chong-chay">Kính Chống Cháy An Toàn</a>
+          <a href="#prod-kinh-mo">Kính Mờ Phun Cát</a>
+          <a href="#prod-kinh-dien">Kính Điện Thông Minh</a>
+          <a href="#prod-kinh-uon-cong">Kính Uốn Cong Cường Lực</a>
+          <a href="#prod-guong">Gương Tráng Bạc & Gương Decor</a>
+        </div>
+      </div>
+
+      <a href="#quality">Chất lượng</a>
+      <a href="#news">Tin tức</a>
+      <a href="#footer-contact">Liên hệ</a>
+    </nav>
+  </header>
+
+  <!-- 2. HERO BANNER -->
+  <section class="hero">
+    <h1>DƯƠNGHUYGLASS</h1>
+    <p style="font-size: 2rem; font-weight: bold;">Vững Bước<br>Tiên Phong</p>
+  </section>
+
+  <div class="sub-bar">
+    <div>
+      <p><strong>Chào mừng đến với nhà máy kính cường lực DƯƠNG HUY®</strong></p>
+      <p><small>Nhà máy: Cụm Công Nghiệp Gia Xuyên, Phường Thạch Khôi, TP. Hải Phòng </small></p>
+      <p><small>VPĐD: Số 30, Đường Quốc lộ 37, Khu 1, Phường Thạch Khôi, TP. Hải Phòng </small></p>
+    </div>
+    <button class="btn-quote" onclick="document.getElementById('footer-contact').scrollIntoView({behavior: 'smooth'})">Nhận báo giá từ nhà máy &rsaquo;</button>
+  </div>
+
+  <!-- 3. KHỐI GIỚI THIỆU TABBED COMPONENT -->
+  <div class="container" id="about-section">
+    <div class="about-tabs-container">
+      
+      <!-- HEADER THẺ TAB -->
+      <div class="tabs-header">
+        <button class="tab-btn active" onclick="openTab(event, 'tab-gioi-thieu-chung')">
+          Giới thiệu chung
+        </button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-thong-tin-cong-ty')">
+          Thông tin công ty
+        </button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-su-menh-tam-nhin')">
+          Sứ mệnh – Tầm nhìn
+        </button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-so-do-to-chuc')">
+          Sơ đồ tổ chức
+        </button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-he-thong-van-phong')">
+          Hệ thống văn phòng đại diện
+        </button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-chinh-sach-quy-dinh')">
+          Chính sách & Quy định
+        </button>
+      </div>
+
+      <!-- TAB 1: GIỚI THIỆU CHUNG -->
+      <div id="tab-gioi-thieu-chung" class="tab-content active">
+        <div class="tab-grid">
+          <div class="tab-text">
+            <h3>Giới Thiệu Chung</h3>
+            <p>Công ty Cổ phần Dịch vụ và Thương mại Dương Huy được thành lập từ năm 2013, là đơn vị tiên phong trong lĩnh vực sản xuất, gia công kính an toàn, kính cường lực và kính kiến trúc tại Việt Nam.</p>
+            <p>Với đội ngũ nhân viên trẻ, năng động, nhiệt huyết và được đào tạo bài bản, chúng tôi không ngừng nỗ lực để mang lại giải pháp kính tối ưu nhất cho hàng trăm dự án xây dựng trên toàn quốc.</p>
+          </div>
+          <div class="tab-image">
+            <img src="https://i.ibb.co/x8rkFj3m/gioi-thieu-chung-duong-huy.png" alt="Giới thiệu chung Dương Huy">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: THÔNG TIN CÔNG TY -->
+      <div id="tab-thong-tin-cong-ty" class="tab-content">
+        <div class="tab-grid">
+          <div class="tab-text">
+            <h3>Thông Tin Công Ty</h3>
+            <ul class="info-list">
+              <li><strong>Tên doanh nghiệp:</strong> CÔNG TY CỔ PHẦN DỊCH VỤ VÀ THƯƠNG MẠI DƯƠNG HUY</li>
+              <li><strong>Mã số thuế:</strong> 0801040692</li>
+              <li><strong>Người đại diện:</strong> Phạm Đức Hạnh (Giám đốc)</li>
+              <li><strong>Năm thành lập:</strong> 2013</li>
+              <li><strong>Địa chỉ nhà máy:</strong> Cụm công nghiệp Gia Xuyên, Xã Gia Xuyên, Phường Thạch Khôi, TP. Hải Phòng</li>
+              <li><strong>Website:</strong> kinhduonghuy.vn | <strong>Hotline:</strong> 0898 274 274</li>
+            </ul>
+          </div>
+          <div class="tab-image">
+            <img src="https://i.ibb.co/TZvptF7/hakinh.jpg" alt="Thông tin nhà máy">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: SỨ MỆNH - TẦM NHÌN -->
+      <div id="tab-su-menh-tam-nhin" class="tab-content">
+        <div class="tab-grid">
+          <div class="tab-text">
+            <h3>Sứ Mệnh – Tầm Nhìn</h3>
+            <p><strong>Tầm nhìn:</strong> Trở thành thương hiệu gia công kính an toàn và kính cường lực chất lượng hàng đầu khu vực, là đối tác tin cậy của các nhà thầu lớn.</p>
+            <p><strong>Sứ mệnh:</strong> Nâng tầm vẻ đẹp kiến trúc và đảm bảo độ an toàn tuyệt đối cho mọi công trình thông qua công nghệ kính hiện đại và quy trình kiểm định nghiêm ngặt.</p>
+          </div>
+          <div class="tab-image">
+            <img src="https://i.ibb.co/yFccvmN8/toa-nha-hien-dai-ung-dung-kinh-duong-huy.jpg" alt="Tầm nhìn kiến trúc">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: SƠ ĐỒ TỔ CHỨC -->
+      <div id="tab-so-do-to-chuc" class="tab-content">
+        <h3>Sơ Đồ Tổ Chức</h3>
+        <p style="margin-bottom: 20px;">Bộ máy quản lý chuyên nghiệp được sắp xếp tối ưu nhằm vận hành nhà máy hiệu quả và cung ứng dịch vụ chu đáo nhất:</p>
+        <div class="org-chart-box">
+          <p><strong>HỘI ĐỒNG QUẢN TRỊ / BAN GIÁM ĐỐC</strong></p>
+          <p style="margin: 10px 0;">↓</p>
+          <p>Phòng Kế Toán — Phòng Kinh Doanh — Phòng Kỹ Thuật — Ban Quản Lý Nhà Máy</p>
+          <p style="margin: 10px 0;">↓</p>
+          <p>Phân Xưởng Cắt CNC — Phân Xưởng Tôi Cường Lực — Phân Xưởng Kính Dán/Hộp — Bộ Phận QC/Vận Chuyển</p>
+        </div>
+      </div>
+
+      <!-- TAB 5: HỆ THỐNG VĂN PHÒNG ĐẠI DIỆN -->
+      <div id="tab-he-thong-van-phong" class="tab-content">
+        <div class="tab-grid">
+          <div class="tab-text">
+            <h3>Hệ Thống Văn Phòng Đại Diện</h3>
+            <ul class="info-list">
+              <li><strong>Trụ sở chính & VPĐD:</strong> Số 30, Đường Quốc lộ 37, Khu 1, Phường Thạch Khôi, TP. Hải Phòng.</li>
+              <li><strong>Nhà máy sản xuất:</strong> Cụm công nghiệp Gia Xuyên, Phường Thạch Khôi, TP. Hải Phòng.</li>
+              <li><strong>Tổng đài hỗ trợ:</strong> 02203 715 715</li>
+              <li><strong>Hotline tư vấn dự án:</strong> 0898 274 274</li>
+            </ul>
+          </div>
+          <div class="tab-image">
+            <img src="https://i.ibb.co/m5GB4Fqx/gapkhachhang.jpg" alt="Văn phòng làm việc">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 6: CHÍNH SÁCH & QUY ĐỊNH -->
+      <div id="tab-chinh-sach-quy-dinh" class="tab-content">
+        <h3>Chính Sách & Quy Định</h3>
+        <ul class="info-list" style="margin-top: 10px;">
+          <li><strong>Chính sách chất lượng:</strong> Cam kết 100% sản phẩm đạt tiêu chuẩn ISO 9001:2015 và các chuẩn kiểm định Việt Nam.</li>
+          <li><strong>Chính sách bảo hành:</strong> Bảo hành chính hãng cho các dòng kính dán, kính hộp và lỗi tôi cường lực theo hợp đồng.</li>
+          <li><strong>Chính sách vận chuyển:</strong> Hỗ trợ giao hàng tận chân công trình bằng xe chuyên dụng an toàn.</li>
+          <li><strong>Quy định thanh toán & Đặt hàng:</strong> Rõ ràng, minh bạch, đảm bảo quyền lợi tốt nhất cho đối tác.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. SẢN PHẨM CỦA CÔNG TY -->
+  <div class="container" id="products">
+    <div class="production-section">
+      <div class="prod-image">
+        <img src="https://i.ibb.co/yFccvmN8/toa-nha-hien-dai-ung-dung-kinh-duong-huy.jpg" alt="Tòa nhà hiện đại ứng dụng kính Dương Huy">
+      </div>
+      <div class="prod-content">
+        <h2>Sản Phẩm Của Chúng Tôi</h2>
+        <div class="yellow-btn-list">
+          
+          <details class="prod-accordion" id="prod-kinh-dan">
+            <summary>Kính Dán An Toàn</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/d4zYb2XS/kinhdan.jpg" alt="Mẫu Kính Dán An Toàn">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-cuong-luc">
+            <summary>Kính Cường Lực</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/WCW1ncx/mau-kinh-cuong-luc.jpg" alt="Mẫu Kính Cường Lực">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-hop">
+            <summary>Kính Hộp Cách Âm Cách Nhiệt</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/B2sD60wY/kinhhop.jpg" alt="Mẫu Kính Hộp Cách Âm">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-dan-cuong-luc">
+            <summary>Kính Dán Cường Lực</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/d4zYb2XS/kinhdan.jpg" alt="Mẫu Kính Dán Cường Lực">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-son">
+            <summary>Kính Sơn Màu Trang Trí</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/VcM3YTWM/kinh-mau.jpg" alt="Mẫu Kính Sơn Màu">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-phan-quang">
+            <summary>Kính Phản Quang</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/yFccvmN8/toa-nha-hien-dai-ung-dung-kinh-duong-huy.jpg" alt="Mẫu Kính Phản Quang">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-low-e">
+            <summary>Kính Low-E Tiết Kiệm Năng Lượng</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/yFccvmN8/toa-nha-hien-dai-ung-dung-kinh-duong-huy.jpg" alt="Mẫu Kính Low-E">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-chong-chay">
+            <summary>Kính Chống Cháy An Toàn</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/d4zYb2XS/kinhdan.jpg" alt="Mẫu Kính Chống Cháy">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-mo">
+            <summary>Kính Mờ Phun Cát</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/WCW1ncx/mau-kinh-cuong-luc.jpg" alt="Mẫu Kính Mờ Phun Cát">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-dien">
+            <summary>Kính Điện Thông Minh</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/B2sD60wY/kinhhop.jpg" alt="Mẫu Kính Điện Thông Minh">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-kinh-uon-cong">
+            <summary>Kính Uốn Cong Cường Lực</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/WCW1ncx/mau-kinh-cuong-luc.jpg" alt="Mẫu Kính Uốn Cong">
+            </div>
+          </details>
+
+          <details class="prod-accordion" id="prod-guong">
+            <summary>Gương Tráng Bạc & Gương Decor</summary>
+            <div class="prod-content-box">
+              <img src="https://i.ibb.co/VcM3YTWM/kinh-mau.jpg" alt="Gương Tráng Bạc Decor">
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. CHẤT LƯỢNG / ĐỐI TÁC -->
+  <div class="container" id="quality">
+    <div class="section-header">
+      <div class="section-title">Chất Lượng DƯƠNG HUY®</div>
+      <a href="#" style="font-size:0.85rem; color:#0284c7;">+ Xem thêm</a>
+    </div>
+    <div class="partner-logos">
+      <img src="https://i.ibb.co/4wBVvVNh/i-SO.jpg" alt="Chứng nhận ISO 9001">
+      <img src="https://i.ibb.co/3m7mWrG7/QCVN.jpg" alt="QCVN 16">
+      <img src="https://i.ibb.co/4wL87Lwk/QCVN1.jpg" alt="Tiêu chuẩn QCVN">
+    </div>
+  </div>
+
+  <!-- KHỐI HÌNH ẢNH NHÀ MÁY & QUY TRÌNH -->
+  <div class="about-card">
+    <h2 class="about-title">Hình Ảnh Nhà Máy & Quy Trình Sản Xuất</h2>
+    
+    <details class="toggle-section" open>
+      <summary class="toggle-summary">⚙️ Dây Chuyền Máy Móc Hiện Đại</summary>
+      <div class="gallery-grid">
+<div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/Z6T8Sdm0/lo toi kinh cuong luc.png" alt="lo toi kinh cuong luc">
+          </div>
+          <div class="img-caption">Lò tôi kính cường lực </div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/S76v6jwm/laykinh.jpg" alt="Máy lấy kính tự động">
+          </div>
+          <div class="img-caption">Máy lấy kính tự động</div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/B2fyD2K0/cat-CNC.jpg" alt="Máy cắt kính CNC">
+          </div>
+          <div class="img-caption">Máy cắt kính CNC</div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/7NkTdK1d/catnuoc.jpg" alt="Máy cắt tia nước CNC">
+          </div>
+          <div class="img-caption">Máy cắt tia nước CNC</div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/KxWD9xGp/mai.jpg" alt="Dây chuyền mài tự động">
+          </div>
+          <div class="img-caption">Dây chuyền mài tự động</div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/sd80zDBS/pfim.jpg" alt="Phòng dán fim">
+          </div>
+          <div class="img-caption">Phòng dán fim</div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/TZvptF7/hakinh.jpg" alt="Máy hạ kính dán tự động">
+          </div>
+          <div class="img-caption">Máy hạ kính dán tự động</div>
+        </div>
+<div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/Qjkkprvf/may-dong-goi-kinh-dan.jpg" alt="Máy dong goi kinh ">
+          </div>
+          <div class="img-caption">Máy đóng gói kinh dán</div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/21Wk2PZn/xe1.jpg" alt="Vận Chuyển Xe Chuyên Dụng ">
+          </div>
+          <div class="img-caption">Vận Chuyển Xe Chuyên Dụng </div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/Nd7VbYmQ/xe2.jpg" alt="Vận Chuyển Xe Chuyên Dụng ">
+          </div>
+          <div class="img-caption">Vận Chuyển Xe Chuyên Dụng </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="toggle-section">
+      <summary class="toggle-summary">Hoạt Động </summary>
+      <div class="gallery-grid">
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/m5GB4Fqx/gapkhachhang.jpg" alt="Gặp gỡ Giao lưu với đối tác">
+          </div>
+          <div class="img-caption">Gặp gỡ Giao lưu với đối tác</div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/608mrMfK/dulich1.jpg" alt="Tổ chức du lịch hè">
+          </div>
+          <div class="img-caption">Tổ chức du lịch hè</div>
+        </div>
+        <div class="img-card">
+          <div class="img-box">
+            <img src="https://i.ibb.co/0pWt8hg5/dulich2.jpg" alt="Hoạt động teambuilding">
+          </div>
+          <div class="img-caption">Hoạt động teambuilding</div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 6. TIN TỨC SỰ KIỆN -->
+  <div class="container" id="news">
+    <div class="section-header">
+      <div class="section-title">Tin Tức & Sự Kiện</div>
+    </div>
+    
+    <div class="news-grid">
+      <div>
+        <div class="news-main-card">
+          <img src="https://i.ibb.co/608mrMfK/dulich1.jpg" alt="Sự kiện tin tức">
+          <div class="news-main-content">
+            <div class="news-main-title">KÍNH CƯỜNG LỰC DƯƠNG HUY® ĐỒNG HÀNH CÙNG CÁC DỰ ÁN LỚN</div>
+            <div class="news-date">26/08/2026</div>
+            <div class="news-desc">Khẳng định vị thế thương hiệu hàng đầu trong ngành kính an toàn và kính cường lực trên thị trường...</div>
+          </div>
+        </div>
+
+        <div class="news-list">
+          <a href="#" class="news-list-item">Kỷ niệm 10 năm thành lập thương hiệu kính DƯƠNG HUY®</a>
+          <a href="#" class="news-list-item">Tri ân khách hàng và đối tác chiến lược năm 2026</a>
+          <a href="#" class="news-list-item">Khai xuân sản xuất, đảm bảo tiến độ cho các công trình trọng điểm</a>
+        </div>
+      </div>
+
+      <div class="center-banners">
+        <div class="banner-box">
+          <img src="https://i.ibb.co/Jwspz2zQ/logo-img.jpg" style="height:50px; background:#fff; padding:4px; border-radius:4px; margin-bottom: 10px;" alt="Logo Dương Huy"><br>
+          <strong style="font-size: 1.1rem;">CÔNG TY KÍNH CƯỜNG LỰC DƯƠNG HUY</strong>
+        </div>
+        <div class="banner-box-img">
+          <span>KẾT NỐI DOANH NGHIỆP</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="investor-box">
+          <div class="investor-title">📊 DÀNH CHO NHÀ ĐẦU TƯ / ĐỐI TÁC</div>
+          <div class="investor-links">
+            <a href="#">• Hồ sơ năng lực DƯƠNG HUY®</a>
+            <a href="#">• Catalogue sản phẩm Kính Cường Lực</a>
+            <a href="#">• Chứng nhận chất lượng sản phẩm</a>
+            <a href="#">• Các dự án tiêu biểu đã thi công</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       7. KHỐI FOOTER CHÂN TRANG
+  ========================================================= -->
+  <footer class="site-footer" id="footer-contact">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- CỘT 1: GIỚI THIỆU -->
+        <div class="footer-col">
+          <h4>Giới thiệu</h4>
+          <ul class="footer-menu">
+            <li><a href="#about-section" onclick="openTab(event, 'tab-gioi-thieu-chung')">Về chúng tôi</a></li>
+            <li><a href="#about-section" onclick="openTab(event, 'tab-thong-tin-cong-ty')">Cơ hội nghề nghiệp</a></li>
+            <li><a href="#about-section" onclick="openTab(event, 'tab-chinh-sach-quy-dinh')">Chính sách & Quy định</a></li>
+            <li><a href="#about-section" onclick="openTab(event, 'tab-chinh-sach-quy-dinh')">Chính sách dành cho đại lý, đối tác</a></li>
+          </ul>
+          <div class="gov-badge">✓ ĐÃ THÔNG BÁO </div>
+        </div>
+
+        <!-- CỘT 2: HOTLINE & KẾT NỐI -->
+        <div class="footer-col">
+          <h4>Hotline liên hệ:</h4>
+          <div class="hotline-box">
+            <div class="phone-icon">📞</div>
+            <div>
+              <div class="hotline-num">0898.274.274</div>
+              <div class="hotline-note">(Tất cả các ngày trong tuần)</div>
+            </div>
+          </div>
+
+          <h4 style="margin-top: 20px;">Kết nối với Kính Dương Huy (DƯƠNG HUY®)</h4>
+          <div class="social-icons">
+            <a href="#" class="social-btn">f</a>
+            <a href="#" class="social-btn">🎵</a>
+            <a href="#" class="social-btn">✉</a>
+            <a href="#" class="social-btn">📞</a>
+            <a href="#" class="social-btn">▶</a>
+          </div>
+
+          <div class="work-hours">Giờ làm việc: 7.30-17.00 Hàng ngày</div>
+          <div class="work-note">(Quý khách để lại cuộc gọi nhỡ, chúng tôi sẽ liên lạc lại ngay khi có thể)</div>
+        </div>
+
+        <!-- CỘT 3: THÔNG TIN CÔNG TY & NHÀ MÁY -->
+        <div class="footer-col">
+          <h4>Liên hệ</h4>
+          <div class="company-name-ft">Công ty Cổ phần Dịch vụ và Thương mại Dương Huy</div>
+          
+          <div class="address-item">
+            <strong>→ Địa chỉ nhà máy sản xuất:</strong> Cụm công nghiệp Gia Xuyên, Phường Thạch Khôi, TP. Hải Phòng
+          </div>
+          
+          <div class="address-item">
+            <strong>→ Nơi cấp:</strong> Sở Kế hoạch và Đầu tư TP Hải Phòng
+          </div>
+        </div>
+
+        <!-- CỘT 4: HỆ THỐNG VĂN PHÒNG ĐẠI DIỆN -->
+        <div class="footer-col">
+          <h4>Hệ thống văn phòng đại diện</h4>
+          <ul class="office-list">
+            <li class="office-item">
+              <div class="office-addr">VPĐD: Số 30, Quốc lộ 37, Khu 1, P. Thạch Khôi, TP. Hải Phòng</div>
+              <div class="office-tel">02203.715.715 / 0898.274.274</div>
+            </li>
+            <li class="office-item">
+              <div class="office-addr">Nhà máy sản xuất: Cụm Công Nghiệp Gia Xuyên, Phường Thạch Khôi, TP. Hải Phòng</div>
+              <div class="office-tel">02203.715.715 / 0898.274.274</div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- COPYRIGHT FOOTER -->
+      <div class="copyright-bar">
+        © 2026 CÔNG TY CỔ PHẦN DỊCH VỤ VÀ THƯƠNG MẠI DƯƠNG HUY. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT XỬ LÝ CHUYỂN TAB -->
+  <script>
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+
+      // Ẩn tất cả các Tab Content
+      tabcontent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+      }
+
+      // Bỏ trạng thái active của tất cả Tab Buttons
+      tablinks = document.getElementsByClassName("tab-btn");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+
+      // Hiển thị Tab đang chọn
+      var currentTab = document.getElementById(tabName);
+      if (currentTab) {
+        currentTab.classList.add("active");
+      }
+
+      // Kích hoạt nút Tab tương ứng
+      for (i = 0; i < tablinks.length; i++) {
+        if (tablinks[i].getAttribute('onclick') && tablinks[i].getAttribute('onclick').includes(tabName)) {
+          tablinks[i].classList.add("active");
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
